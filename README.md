@@ -1,5 +1,6 @@
 # Shell-scripting
-## Shell Scripting: A Project-Based Approach
+## Shell Scripting: A Project-Based Approach <br/>
+![](https://img.shields.io/badge/Version%20Control-GIT-green)
 
 **Goal:** <br/>
 The goal of this repository is to run shell scripts in a local Linux lab environment. Once you have the environment
