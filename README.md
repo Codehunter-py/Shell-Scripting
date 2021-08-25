@@ -99,7 +99,7 @@ Bring up your first virtual machine running Linux with Vagrant. <br/>
 Once all installments and configurations are done, you can download repository files and copy them to the Vagrant Project folder. For example: <br/>
 `cd shell-scripting/testbox01` <br/>
 `vagrant up` <br/>
-`./luser-demo01.sh` <br/>
+`./file-name` <br/>
 
 
 
