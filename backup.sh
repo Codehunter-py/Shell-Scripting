@@ -1,32 +1,53 @@
-#!/bin/bash
+#!/bin/bash                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                               
+# This bash script is used to backup a user's home directory to /Desktop/.                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                               
+if [ -z \$1 ]; then                                                                                                                                                                                                                                                             
+        user=$(whoami)                                                                                                                                                                                                                                                         
+else                                                                                                                                                                                                                                                                           
+        if [ ! -d "/home/\$1" ]; then                                                                                                                                                                                                                                           
+                echo "Requested \$1 user home directory doesn't exist."                                                                                                                                                                                                         
+                exit 1                                                                                                                                                                                                                                                         
+        fi                                                                                                                                                                                                                                                                     
+        user=\$1                                                                                                                                                                                                                                                                
+fi                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                               
+input=/home/$user                                                                                                                                                                                                                                                              
+output=/home/$user/Desktop/${user}_home_$(date +%Y-%m-%d_%H%M%S).tar.gz                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                               
+function total_files {                                                                                                                                                                                                                                                         
+        find \$1 -type f | wc -l                                                                                                                                                                                                                                                
+}                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                               
+function total_directories {                                                                                                                                                                                                                                                   
+        find \$1 -type d | wc -l                                                                                                                                                                                                                                                
+}                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                               
+function total_archived_directories {                                                                                                                                                                                                                                          
+        tar -tzf \$1 | grep  /$ | wc -l                                                                                                                                                                                                                                         
+}                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                               
+function total_archived_files {                                                                                                                                                                                                                                                
+        tar -tzf \$1 | grep -v /$ | wc -l                                                                                                                                                                                                                                       
+}                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                               
+tar -czf $output $input 2> /dev/null                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                               
+src_files=$( total_files $input )
+src_directories=$( total_directories $input )
 
-user=$(whoami)
-input=/home/$user
-output=/tmp/${user}_home_$(date +%Y-%m-%d_%H:%M).tar.gz
+arch_files=$( total_archived_files $output )
+arch_directories=$( total_archived_directories $output )
 
-tar -czf $output $input 2> /dev/null
-echo "Backup of $input completed! Details about the output backup file: "
-ls -l $output
+echo "Files to be included: $src_files"
+echo "Directories to be included: $src_directories"
+echo "Files archived: $arch_files"
+echo "Directories archived: $arch_directories"
 
-# The function total_files displays 
-# a total number of files for a given directory. 
-function total_files {
-    find \1 -type f 
-}
-
-# The function total_directories displays a total number of directories
-# for a given directory.
-
-function total_directories {
-    find \1 -type d 
-}
-
-tar -czf $output $input 2> /dev/null
-echo -n "Files to be included:"
-total_files $input
-echo -n "Directories to be included:"
-total_directories $input
-
-echo "Backup of $input completed!"
-echo "Details about the output backup files:"
-ls -l $output
+if [ $src_files -eq $arch_files ]; then
+        echo "Backup of $input completed!"
+        echo "Details about the output backup file:"
+        ls -l $output
+else
+        echo "Backup of $input failed!"
+fi
