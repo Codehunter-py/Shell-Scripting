@@ -11,14 +11,14 @@ ls -l $output
 # The function total_files displays 
 # a total number of files for a given directory. 
 function total_files {
-    find \1 -type f | wc -1
+    find \1 -type f 
 }
 
 # The function total_directories displays a total number of directories
 # for a given directory.
 
 function total_directories {
-    find \1 -type d | wc -1
+    find \1 -type d 
 }
 
 tar -czf $output $input 2> /dev/null
