@@ -1,5 +1,5 @@
 # Shell-scripting
-## Shell Scripting: A Project-Based Approach <br/>
+## Inspired by A Project-Based Approach Shell Scripting Course <br/>
 ## Technologies and Tools <br/>
 ![](https://img.shields.io/badge/🐧%20OS-Linux/Windows-brightgreen) ![](https://img.shields.io/badge/🧰%EF%B8%8FShell-Bash-brightgreen) ![](https://img.shields.io/badge/👷%20Version%20Control-Git-brightgreen) ![](https://img.shields.io/badge/☁%20Cloud-Vagrant-brightgreen) ![](https://img.shields.io/badge/📦%20Tools-CentOS%207-brightgreen) ![](https://img.shields.io/badge/🛠%20Tools-VSCode-brightgreen)
 
