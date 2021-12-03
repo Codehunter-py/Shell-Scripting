@@ -15,12 +15,11 @@ cd $MY_HOME
 
 if [ -z "${SHOW_FINDING}" ]; then
 	echo "${TIMESTAMP}  INFO  No ${PYCACHE} found."
+	read
 	exit 2 
 else
 	find . -type d -name "${PYCACHE}" -exec rm -rf {} +
 	echo "${TIMESTAMP}  INFO  Cleanup is completed."
+	read
 	exit 0
 fi
-
-sleep 5
-
