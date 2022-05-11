@@ -1,27 +1,21 @@
 # Shell-scripting
-## Inspired by A Project-Based Approach Shell Scripting Course <br/>
+## Includes own developed Prod Scripts and A Project-Based Shell Scripts <br/>
 ## Technologies and Tools <br/>
-![](https://img.shields.io/badge/🐧%20OS-Linux/Windows-brightgreen) ![](https://img.shields.io/badge/🧰%EF%B8%8FShell-Bash-brightgreen) ![](https://img.shields.io/badge/👷%20Version%20Control-Git-brightgreen) ![](https://img.shields.io/badge/☁%20Cloud-Vagrant-brightgreen) ![](https://img.shields.io/badge/📦%20Tools-CentOS%207-brightgreen) ![](https://img.shields.io/badge/🛠%20Tools-VSCode-brightgreen)
+![](https://img.shields.io/badge/🐧%20OS-Linux/RHEL/CentOS/Windows-darkred) ![](https://img.shields.io/badge/🧰%EF%B8%8FShell-Bash-darkgreen) ![](https://img.shields.io/badge/👷%20Version%20Control-Git-black) ![](https://img.shields.io/badge/☁%20Cloud-AWS-orange) ![](https://img.shields.io/badge/🖥️VM-Vagrant/VMWARE/Docker-red) ![](https://img.shields.io/badge/🛠%20Tools-VSCode-blue) 
 
-**Goal:** <br/>
-The goal of this repository is to run shell scripts in a local Linux lab environment. Once you have the environment
-configured you can quickly and easily create and destroy Linux virtual machines on your Windows,
-Mac, or Linux computer.
+**Description:** <br/>
+The purpose of this repository files is to run shell scripts in a local Linux lab environment and test them before deploying the prod environment. Once you have the environment configured you can quickly and easily create and destroy Linux virtual machines on your Windows, Mac, or Linux computer.
 
-*First Part of Scripting* <br/>
-Add users to a Linux system <br/>
-All basics in the process <br/>
-
-*Second Part of Scripting* <br/>
-Text and data manipluation through pipes<br/>
-Handling command line arguments <br/>
-Using special positional parameters <br/>
-Generating random Passwords <br/>
-
-*Additionally* <br/>
-Using for and while loops <br/>
-Mastering I/O <br/>
-Linux programming conventions <br/>
+*Use case of Scripts* <br/>
+- Add users to a Linux system <br/>
+- All basics in the process <br/>
+- Text and data manipluation through pipes<br/>
+- Handling command line arguments <br/>
+- Using special positional parameters <br/>
+- Generating random Passwords <br/>
+- Using for and while loops <br/>
+- Mastering I/O <br/>
+- Linux programming conventions <br/>
 
 ## How to run <br/>
 Install an SSH Client (Windows Users Only)  <br/>
