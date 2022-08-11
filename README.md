@@ -1,7 +1,7 @@
 # Shell-scripting
 ## Includes own developed Prod Scripts and A Project-Based Shell Scripts <br/>
 ## Technologies and Tools <br/>
-![](https://img.shields.io/badge/🐧%20OS-Linux/RHEL/CentOS/Windows-darkred) ![](https://img.shields.io/badge/⚙️Unix-AWK/SED-yellowgreen) ![](https://img.shields.io/badge/🧰%EF%B8%8FShell-Bash-darkgreen) ![](https://img.shields.io/badge/👷%20Version%20Control-Git-black) ![](https://img.shields.io/badge/☁%20Cloud-AWS-orange) ![](https://img.shields.io/badge/🖥️VM-Vagrant/VMWARE/Docker-red) ![](https://img.shields.io/badge/🛠%20Tools-VSCode-blue) 
+![](https://img.shields.io/badge/🐧%20OS-Linux/RHEL/CentOS/Windows-darkred) ![](https://img.shields.io/badge/⚙️Unix-AWK/SED-yellowgreen) ![](https://img.shields.io/badge/🧰%EF%B8%8FShell-Bash/KornShell-darkgreen) ![](https://img.shields.io/badge/👷%20Version%20Control-Git-black) ![](https://img.shields.io/badge/☁%20Cloud-AWS-orange) ![](https://img.shields.io/badge/🖥️VM-Vagrant/VMWARE/Docker-red) ![](https://img.shields.io/badge/🛠%20Tools-VSCode-blue) 
 
 **Description:** <br/>
 The purpose of this repository files is to run shell scripts in a local Linux lab environment and test them before deploying the prod environment. Once you have the environment configured you can quickly and easily create and destroy Linux virtual machines on your Windows, Mac, or Linux computer.
