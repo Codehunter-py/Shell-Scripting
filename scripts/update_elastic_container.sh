@@ -55,7 +55,7 @@ function runNewContainer {
     else
        TIMESTAMP=`date +'%Y%m%d_%H%M%S'`
        echo "${TIMESTAMP}  INFO  Container build is being loaded..." | tee -a ${LOGFILE}
-       docker run --name elk -d --restart=always -p 4560:4560 -it -v /opt/source/docker/bsicrm-json.conf:/etc/logstash/conf.d/05-bsicrm-json.conf -v /opt/source/docker/kibana.yml:/opt/kibana/config/kibana.yml -v /opt/data/elasticsearch:/var/log/elasticsearch sebp/elk:elk_${VERSION_BEATS}
+       docker run --name elk -d --restart=always -p 4560:4560 -it -v /opt/source/docker/server-json.conf:/etc/logstash/conf.d/05-server-json.conf -v /opt/source/docker/kibana.yml:/opt/kibana/config/kibana.yml -v /opt/data/elasticsearch:/var/log/elasticsearch sebp/elk:elk_${VERSION_BEATS}
        echo "${TIMESTAMP}  INFO  Container customization is being handled..." | tee -a ${LOGFILE}
        echo -e "-Xms4g\n-Xmx4g" > /opt/source/docker/heap.options
        docker cp /opt/source/docker/heap.options elk:/etc/elasticsearch/jvm.options.d/
