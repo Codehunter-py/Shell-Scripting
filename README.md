@@ -65,7 +65,7 @@ use the "jasonc/centos7" box for this class. https://app.vagrantup.com/boxes/sea
 
 ## Create a Working Folder <br/>
 When the Command Prompt (Windows) or the Terminal (Mac/Linux) is launched you will be placed in
-your home directory. For example, if I’m logged into a Windows system as "jason" my home
+your home directory. For example, if I’m logged into a Windows system as "user" my home
 directory could be "C:⧵Users⧵user". (Note: this might vary depending on the version of Windows
 you are using.) If I’m logged into a Mac system as "user" my home directory will be "/Users/user".
 If I'm logged into a Linux system as "user" my home directory will be "/home/user". <br/>
@@ -81,9 +81,9 @@ configuration file, called a Vagrantfile. Start out by creating a "testbox01" fo
 *Create Your First Vagrant Files* <br/>
 To create the Vagrant configuration file (Vagrantfile), run the "vagrant init <BOX_NAME> "
 command. Be sure to be in Vagrant project directory you just created. Also, use the
-"jasonc/centos7" box you downloaded earlier. <br/>
+"generic/rhel8" box you downloaded earlier. <br/>
 `cd testbox01` <br/>
-`vagrant init jasonc/centos7` <br/>
+`vagrant init generic/rhel8` <br/>
 ## Create Your First Virtual Machine <br/>
 The first time you run the "vagrant up " command Vagrant will import (clone) the vagrant box into
 VirtualBox and start it. If Vagrant detects that the virtual machine already exists in VirtualBox it will
