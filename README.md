@@ -16,6 +16,8 @@ The purpose of this repository files is to run shell scripts in a local Linux la
 - Using for and while loops <br/>
 - Mastering I/O <br/>
 - Linux programming conventions <br/>
+- Automation of monthly updates <br/>
+- Create/Update operational scripts <br/>
 
 ## How to run <br/>
 Install an SSH Client (Windows Users Only)  <br/>
