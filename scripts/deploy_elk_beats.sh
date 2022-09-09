@@ -33,8 +33,8 @@ echo "${TIMESTAMP}  WARN   Stop filebeat and metricbeat on all nodes with operat
 read -p 'Enter the APITOKEN: ' APITOKEN
 read -p 'Enter desired filebeat & metricbeat version: ' VERSION_BEATS
 
-curl -H X-JFrog-Art-Api:${APITOKEN} -O -s "https://artifactory.$MASK/elastic/${VERSION_BEATS}/filebeat-${VERSION_BEATS}-x86_64.rpm" # masking the domain regarding security. 
-curl -H X-JFrog-Art-Api:${APITOKEN} -O -s "https://artifactory.$MASK/elastic/${VERSION_BEATS}/metricbeat-${VERSION_BEATS}-x86_64.rpm" # masking the domain regarding security. 
+curl -H X-JFrog-Art-Api:${APITOKEN} -O -s "https://artifactory.$MASKED/elastic/${VERSION_BEATS}/filebeat-${VERSION_BEATS}-x86_64.rpm" # masking the domain regarding security. 
+curl -H X-JFrog-Art-Api:${APITOKEN} -O -s "https://artifactory.$MASKED/elastic/${VERSION_BEATS}/metricbeat-${VERSION_BEATS}-x86_64.rpm" # masking the domain regarding security. 
 
 if [ $(ls "$BEATS_SETUP" | wc -l) -ne 0 ]; then
    echo "${TIMESTAMP}  INFO   filebeat-${VERSION_BEATS} and metricbeat-${VERSION_BEATS} downloads completed." | tee -a ${LOGFILE}

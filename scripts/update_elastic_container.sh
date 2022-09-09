@@ -30,7 +30,7 @@ echo "${TIMESTAMP}  WARN   Stop filebeat and metricbeat on all nodes with operat
 read -p 'Enter filebeat & metricbeat version: ' VERSION_BEATS
 
 function downloadElk {
-    wget "https://artifactory.wdt.six-group.net:443/artifactory/cscao-generic-release-remote-cache/docker/elk_${VERSION_BEATS}.tar.gz"
+    wget "https://artifactory.${BASE_MASKED}:443/artifactory/cscao-generic-release-remote-cache/docker/elk_${VERSION_BEATS}.tar.gz"
     gzip -d elk_${VERSION_BEATS}.tar.gz
     
     if [ $(ls -l "$OPT_SETUP" | wc -l) -ne 0 ]; then

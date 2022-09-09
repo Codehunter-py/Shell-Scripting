@@ -1,11 +1,11 @@
 #!/bin/bash
 
 PYCACHE=__pycache__
-MY_HOME=/c/Users/Ibrahim/Desktop
-SHOW_FINDING=`find . -type d -name "${PYCACHE}" 2>/dev/null`
+MY_HOME=/c/Users/$USER
+LIST_FINDINGS=`cd $MY_HOME && $find . -type d -name "${PYCACHE}" 2>/dev/null`
 TIMESTAMP=`date '+%F %T'`
 
-for RESULT in "${SHOW_FINDING}"; do
+for RESULT in "${LIST_FINDINGS}"; do
 	echo "#############################"
 	echo "Result found: $RESULT"
 	echo "#############################"
@@ -13,7 +13,7 @@ done
 
 cd $MY_HOME
 
-if [ -z "${SHOW_FINDING}" ]; then
+if [ -z "${LIST_FINDINGS}" ]; then
 	echo "${TIMESTAMP}  INFO  No ${PYCACHE} found."
 	read
 	exit 2 
