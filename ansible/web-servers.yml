@@ -1,0 +1,26 @@
+---
+- name: Update web servers
+  hosts: example
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+  - name: Ensure apache is at the latest version
+    ansible.builtin.yum:
+      name: httpd
+      state: latest
+
+- name: Update db servers
+  hosts: example
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+  - name: Ensure postgresql is at the latest version
+    ansible.builtin.yum:
+      name: postgresql
+      state: latest
+  - name: Ensure that postgresql is started
+    ansible.builtin.service:
+      name: postgresql
+      state: started
