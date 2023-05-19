@@ -4,7 +4,9 @@
 # Name    : make_iso.sh                                                        #
 # Author  : Ibrahim Musayev                                                    #
 # Purpose : creates a new ISO image named CentOS-7-x86_64.iso and includes     #
-#           latest version of kickstart script.                                #
+#           latest version of kickstart script. Also, The script provides      # 
+#           an interactive menu for the user to choose between generating      #
+#           a new kickstart script or proceeding with an existing one.         #
 # History : 15.05.23 Ibrahim Musayev, creation                                 #
 ################################################################################
 
@@ -16,14 +18,56 @@ mnt_iso_dir="/mnt/iso"
 tmp_workdir="/tmp/workdir"
 tmp_workdir_iso="$tmp_workdir/iso"
 kickstart_dir="$tmp_workdir_iso/kickstart"
+python_replace_parameters="replace_parameters_in_ks_cfg.py"
 ks_cfg=$1
 
-# Check if the kickstart script name is provided
-if [ -z "$1" ]; then
-  read -p "Please provide the name of the kickstart script: " ks_cfg
-else
-  ks_cfg=$1
-fi
+detect_python_command() {
+    if command -v python3 &> /dev/null; then
+        python_command="python3"
+    elif command -v python &> /dev/null; then
+        python_command="python"
+    else
+        echo "Python is not installed."
+        exit 1
+    fi
+}
+
+# Function to generate new kickstart script
+generate_new_kickstart_script() {
+    echo "Generating new kickstart script..."
+    $python_command $python_replace_parameters
+    ks_cfg=generated-ks.cfg
+}
+
+# Function to proceed with existing kickstart script
+proceed_with_existing_kickstart_script() {
+    echo "Proceeding with existing kickstart script..."
+    # Check if the kickstart script name is provided
+    if [ -z "$1" ]; then
+      read -p "Please provide the name of the kickstart script: " ks_cfg
+    else
+      ks_cfg=$1
+    fi
+}
+
+detect_python_command
+
+echo "Do you want to generate a new kickstart script with the new network configuration or proceed with an existing one?"
+select option in "Generate new kickstart script" "Proceed with existing kickstart script"; do
+    case $option in
+        "Generate new kickstart script")
+            generate_new_kickstart_script
+            break
+            ;;
+        "Proceed with existing kickstart script")
+            proceed_with_existing_kickstart_script
+            break
+            ;;
+        *)
+            echo "Invalid option. Please try again."
+            ;;
+    esac
+done
 
 # Check if the ISO file exists in the Downloads folder and proceed further
 if [ -f "$downloads_dir/$iso_file" ]; then
@@ -34,7 +78,7 @@ if [ -f "$downloads_dir/$iso_file" ]; then
         sudo mkdir -p "$mnt_iso_dir"
     else
         echo "Unmount $mnt_iso_dir directory before starting..."
-        sudo umount $mnt_iso_dir
+        sudo umount $mnt_iso_dir 2> /dev/null
     fi
 
     # Check if the /tmp/workdir directory exists
@@ -76,7 +120,7 @@ if [ -f "$downloads_dir/$iso_file" ]; then
               echo "$new_iso_name File successfully created..."
               sudo mv $new_iso_name $new_iso_dir
               echo "The new file is moved to the $new_iso_dir directory..."
-              sudo umount "$mnt_iso_dir"
+              sudo umount "$mnt_iso_dir" 2> /dev/null
           else
               echo "$new_iso_name File creation failed. Exiting..."
               exit 1
