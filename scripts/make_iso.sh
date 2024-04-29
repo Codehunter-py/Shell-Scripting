@@ -3,15 +3,15 @@
 ################################################################################
 # Name    : make_iso.sh                                                        #
 # Author  : Ibrahim Musayev                                                    #
-# Purpose : creates a new ISO image named CentOS-7-x86_64.iso and includes     #
+# Purpose : creates a new ISO image named Rocky-8-x86_64.iso and includes     #
 #           latest version of kickstart script. Also, The script provides      # 
 #           an interactive menu for the user to choose between generating      #
 #           a new kickstart script or proceeding with an existing one.         #
 # History : 15.05.23 Ibrahim Musayev, creation                                 #
 ################################################################################
 
-iso_file="CentOS-7-x86_64-Everything-2009.iso"
-new_iso_name="CentOS-7-x86_64.iso"
+iso_file="Rocky-8.9-x86_64-minimal.iso"
+new_iso_name="Rocky-8-9-x86_64-dvd.iso"
 downloads_dir="$HOME/Downloads"
 new_iso_dir=$downloads_dir/iso
 mnt_iso_dir="/mnt/iso"
@@ -19,7 +19,9 @@ tmp_workdir="/tmp/workdir"
 tmp_workdir_iso="$tmp_workdir/iso"
 kickstart_dir="$tmp_workdir_iso/kickstart"
 python_replace_parameters="replace_parameters_in_ks_cfg.py"
-ks_cfg=$1
+ks_cfg="iad1-ks-physical.cfg"
+isolinux_cfg="isolinux-rocky.cfg"
+user_mod=$(whoami)
 
 detect_python_command() {
     if command -v python3 &> /dev/null; then
@@ -43,10 +45,13 @@ generate_new_kickstart_script() {
 proceed_with_existing_kickstart_script() {
     echo "Proceeding with existing kickstart script..."
     # Check if the kickstart script name is provided
-    if [ -z "$1" ]; then
-      read -p "Please provide the name of the kickstart script: " ks_cfg
+    if [ -z "$ks_cfg" ]; then
+        read -p "Please provide the name of the kickstart script: " ks_cfg
     else
-      ks_cfg=$1
+        read -p "The kickstart script is currently set to '$ks_cfg'. Are you sure you want to continue with this script? (y/n): " confirm
+        if [ "$confirm" != "y" ]; then
+            read -p "Please provide a new name for the kickstart script: " ks_cfg
+        fi
     fi
 }
 
@@ -110,17 +115,19 @@ if [ -f "$downloads_dir/$iso_file" ]; then
       echo "The $kickstart_dir directory doesn't exist. Creating it..."
       sudo mkdir -p "$kickstart_dir"
       sudo cp -p "$ks_cfg" "$kickstart_dir/ks.cfg"
-      sudo cp -p "isolinux.cfg" "$tmp_workdir_iso/isolinux/isolinux.cfg"
+      sudo cp -p "$isolinux_cfg" "$tmp_workdir_iso/isolinux/isolinux.cfg"
       # Check if the copy operation was successful
       if [ $? -eq 0 ]; then
           echo "Kickstart script copied successfully."
           echo "Creating a $new_iso_name File" && cd $tmp_workdir_iso
-          sudo genisoimage -o $new_iso_name -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -V "CentOS 7 x86_64" -R -J -v -T .
+          sudo genisoimage -o $new_iso_name -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -V "Rocky 8 x86_64" -R -J -v -T .
           if [ $? -eq 0 ]; then
               echo "$new_iso_name File successfully created..."
               sudo mv $new_iso_name $new_iso_dir
               echo "The new file is moved to the $new_iso_dir directory..."
               sudo umount "$mnt_iso_dir" 2> /dev/null
+              sudo chmod -R 755 $new_iso_dir
+              sudo chown -R $user_mod:$user_mod $new_iso_dir
           else
               echo "$new_iso_name File creation failed. Exiting..."
               exit 1
@@ -135,6 +142,6 @@ if [ -f "$downloads_dir/$iso_file" ]; then
     fi
 else
     echo "Please download the ISO file: $iso_file"
-    echo "First you need a CentOS-7 ISO --> https://www.centos.org/download/"
+    echo "First you need a Rocky-8 ISO --> https://rockylinux.org/download/"
     exit 1
 fi
